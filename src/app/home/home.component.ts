@@ -16,16 +16,21 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    var mapProp = {
+    const mapProp = {
       center: new google.maps.LatLng(18.5793, 73.8143),
       zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.showPosition(position);
+      });
+    }
   }
 
   setMapType(mapTypeId: string) {
-    this.map.setMapTypeId(mapTypeId)
+    this.map.setMapTypeId(mapTypeId);
   }
 
   findMe() {
@@ -34,7 +39,7 @@ export class HomeComponent implements OnInit {
         this.showPosition(position);
       });
     } else {
-      alert("Geolocation is not supported by this browser.");
+      alert('Geolocation is not supported by this browser.');
     }
   }
 
@@ -45,7 +50,7 @@ export class HomeComponent implements OnInit {
         this.showTrackingPosition(position);
       });
     } else {
-      alert("Geolocation is not supported by this browser.");
+      alert('Geolocation is not supported by this browser.');
     }
   }
 
@@ -53,7 +58,7 @@ export class HomeComponent implements OnInit {
     this.currentLat = position.coords.latitude;
     this.currentLong = position.coords.longitude;
 
-    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     this.map.panTo(location);
 
     if (!this.marker) {
@@ -62,8 +67,7 @@ export class HomeComponent implements OnInit {
         map: this.map,
         title: 'Got you!'
       });
-    }
-    else {
+    } else {
       this.marker.setPosition(location);
     }
   }
@@ -73,7 +77,7 @@ export class HomeComponent implements OnInit {
     this.currentLat = position.coords.latitude;
     this.currentLong = position.coords.longitude;
 
-    let location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
     this.map.panTo(location);
 
     if (!this.marker) {
@@ -82,8 +86,7 @@ export class HomeComponent implements OnInit {
         map: this.map,
         title: 'Got you!'
       });
-    }
-    else {
+    } else {
       this.marker.setPosition(location);
     }
   }
