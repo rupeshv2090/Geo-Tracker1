@@ -9,6 +9,7 @@ export class AppComponent implements OnInit {
   title = 'Geo-Tracker';
   isMobile: boolean;
   isLoggedIn: boolean;
+  isVerified: boolean;
 
   constructor(
     // private media: ObservableMedia,
@@ -17,6 +18,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeToScreenSizeChanges();
+  }
+
+  otpVerifiedFromLogin = (confirm: boolean) => {
+    this.isVerified = confirm;
   }
 
   private subscribeToScreenSizeChanges() {

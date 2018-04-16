@@ -1,3 +1,22 @@
-<p>
-  login works!
-</p>
+<mat-card>
+  <mat-card-title>Login</mat-card-title>
+  <mat-divider></mat-divider>
+  <form class="example-form" *ngIf="!otpSend">
+    <mat-form-field >
+      <input matInput placeholder="Mobile Number" name="mobileNumber" type="tel" maxlength="10" [(ngModel)]="mobileNumber" required>
+    </mat-form-field>
+    <div class="clearfix"></div>
+    <button mat-raised-button style="margin-top:25px" [disabled]="!mobileNumber" (click)="sendOTP()">Send OTP</button>
+  </form>
+
+  <form class="example-form" *ngIf="otpSend">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="OTP" name="otpNumber" type="text" maxlength="4" [(ngModel)]="otpNumber" required>
+    </mat-form-field>
+    <button mat-raised-button style="margin-top:25px" [disabled]="!otpNumber" (click)="verifyOTP()">
+      <!-- <mat-spinner *ngIf="verifing" color="primary" mode="indeterminate" determinate="15"></mat-spinner>
+        <span *ngIf="!verifing">Confirm OTP</span> -->
+      Confirm OTP
+    </button>
+  </form>
+</mat-card>

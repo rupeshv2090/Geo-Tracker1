@@ -1,17 +1,29 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<!-- <div style="text-align:left">
+<!-- <div *ngIf="!isVerified">
+  <app-login (otpVerified)="otpVerifiedFromLogin($event)"></app-login>
+</div>
+
+<div *ngIf="isVerified">
+<div style="text-align:left">
   <img width="80" height="60" alt="Angular Logo" src="../assets/GeoLocation.png">
   <h1 style="text-align:right; margin-top: -61px; ">
     {{ title }}!
   </h1>
 </div>
-<app-home></app-home> -->
-<div *ngIf="!isLoggedIn" style="background-color:darkolivegreen;">
-  <mat-card class="login-style">
+<mat-tab-group>
+  <mat-tab label="Map"><app-home></app-home></mat-tab>
+  <mat-tab label="Client">Client Page</mat-tab>
+  <mat-tab label="Meeting">Meeting Page</mat-tab>
+  <mat-tab label="Notifications">Notifications Page</mat-tab>
+</mat-tab-group>
+</div> -->
+
+<div *ngIf="!isVerified" style="background-color:darkolivegreen;">
+  <!-- <mat-card class="login-style">
     <button class="login-button-style" mat-raised-button color="primary" (click)="isLoggedIn=true">Login Me!</button>
-  </mat-card>
+  </mat-card> -->
+  <app-login (otpVerified)="otpVerifiedFromLogin($event)"></app-login>
 </div>
-<div *ngIf="isLoggedIn">
+<div *ngIf="isVerified">
   <mat-card class="demo-panel">
     <mat-card-title>
       <!-- Angular Material Sidenav Demo -->
