@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'Geo-Tracker';
   isMobile: boolean;
-
+  isLoggedIn: boolean;
 
   constructor(
     // private media: ObservableMedia,
