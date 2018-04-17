@@ -1,0 +1,128 @@
+<mat-progress-bar *ngIf="loading" mode="indeterminate" fxFlexAlign="center"></mat-progress-bar>
+<mat-card>
+  <form fxLayout="column" class="mat-typography" fxFlex="100" (ngSubmit)="onSubmit(clientDetails)" #clientForm="ngForm">
+    <div fxLayout="row">
+      <div fxLayout="column" class="mat-typography" fxFlex="100">
+        <div fxLayout="row" fxFlex="80" fxLayout="column" fxLayoutGap="30px">
+          <div *ngIf="!editMode" class="view-wrapper" fxFlex="50">
+            <div fxLayout="column">
+              <label class="view-label">Assing To</label>
+              <span class="view-content">{{ clientDetails.assingTo }}</span>
+            </div>
+          </div>
+          <mat-form-field *ngIf="editMode" fxLayout="column" fxFlex="50">
+            <mat-select placeholder="Assing To" name="assing" required>
+              <!-- <mat-option *ngFor="let type of faaTypes;" [value]="type.value"> -->
+              <mat-option>
+                Test 1
+              </mat-option>
+              <mat-option>
+                Test 2
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+        <div fxLayout="row" fxFlex="80" fxLayout="column" fxLayoutGap="30px">
+
+          <div *ngIf="!editMode" class="view-wrapper" fxFlex="50">
+            <div fxLayout="column">
+              <label class="view-label">Client Name</label>
+              <span class="view-content">{{ clientDetails.name }}</span>
+            </div>
+          </div>
+          <mat-form-field *ngIf="editMode" fxLayout="column" fxFlex="50">
+            <input matInput placeholder="Client Name" name="name" [(ngModel)]="clientDetails.name">
+          </mat-form-field>
+
+        </div>
+        <div fxLayout="row" fxFlex="80" fxLayout="column" fxLayoutGap="30px">
+
+          <div *ngIf="!editMode" class="view-wrapper" fxFlex="50">
+            <div fxLayout="column">
+              <label class="view-label">Mobile Number</label>
+              <span class="view-content">{{ clientDetails.mobile }}</span>
+            </div>
+          </div>
+          <mat-form-field *ngIf="editMode" fxLayout="column" fxFlex="50">
+            <input matInput placeholder="Mobile Number" name="mobile" [(ngModel)]="clientDetails.mobile">
+          </mat-form-field>
+
+        </div>
+        <div fxLayout="row" fxFlex="80" fxLayout="column" fxLayoutGap="30px">
+
+          <div *ngIf="!editMode" class="view-wrapper" fxFlex="50">
+            <div fxLayout="column">
+              <label class="view-label">Email</label>
+              <span class="view-content">{{ clientDetails.email }}</span>
+            </div>
+          </div>
+          <mat-form-field *ngIf="editMode" fxLayout="column" fxFlex="50">
+            <input matInput placeholder="Email" name="email" [(ngModel)]="clientDetails.email">
+          </mat-form-field>
+
+        </div>
+        <div fxLayout="row" fxFlex="80" fxLayout="column" fxLayoutGap="30px">
+
+          <div *ngIf="!editMode" class="view-wrapper" fxFlex="50">
+            <div fxLayout="column">
+              <label class="view-label">Company Name</label>
+              <span class="view-content">{{ clientDetails.companyName }}</span>
+            </div>
+          </div>
+          <mat-form-field *ngIf="editMode" fxLayout="column" fxFlex="50">
+            <input matInput placeholder="Company Name" name="company" [(ngModel)]="clientDetails.companyName">
+          </mat-form-field>
+
+        </div>
+        <div fxLayout="row" fxFlex="80" fxLayout="column" fxLayoutGap="30px">
+
+          <div *ngIf="!editMode" class="view-wrapper" fxFlex="50">
+            <div fxLayout="column">
+              <label class="view-label">Address</label>
+              <span class="view-content">{{ clientDetails.address }}</span>
+            </div>
+          </div>
+          <mat-form-field *ngIf="editMode" fxLayout="column" fxFlex="50">
+            <input matInput placeholder="Address" name="address" [(ngModel)]="clientDetails.address">
+          </mat-form-field>
+
+        </div>
+        <div fxLayout="row" fxFlex="80" fxLayout="column" fxLayoutGap="30px">
+
+          <div *ngIf="!editMode" class="view-wrapper" fxFlex="50">
+            <div fxLayout="column">
+              <label class="view-label">Description</label>
+              <span class="view-content">{{ clientDetails.description }}</span>
+            </div>
+          </div>
+          <mat-form-field *ngIf="editMode" fxLayout="column" fxFlex="50">
+            <input matInput placeholder="Description" name="description" [(ngModel)]="clientDetails.description">
+          </mat-form-field>
+
+        </div>
+      </div>
+    </div>
+    <div fxLayout="row">
+      <div fxLayout="column" fxFlex="100">
+        <div mat-dialog-actions *ngIf="!editMode" fxLayout="row">
+          <span fxFlex fxLayoutAlign="end">
+            <button mat-button color="primary" type="button" (click)="edit()">Edit</button>
+          </span>
+        </div>
+        <div mat-dialog-actions *ngIf="editMode" fxLayout="row">
+          <span *ngIf="!clientDetails.addMode" fxFlex fxLayoutAlign="start">
+            <button mat-button color="warn" type="button" (click)="delete()">Delete</button>
+          </span>
+          <span fxFlex fxLayoutAlign="end">
+            <button mat-button type="button" (click)="cancel()">Cancel</button>
+            <button mat-button color="primary" type="submit" fxLayoutAlign="center center" [disabled]="!clientForm.form.valid">
+              <span *ngIf="!saving">Save</span>
+              <mat-spinner *ngIf="saving" diameter="24"></mat-spinner>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+</mat-card>

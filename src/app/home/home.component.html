@@ -1,10 +1,8 @@
 <div>
-  <div class="row">
-    <button (click)="setMapType('terrain')" class="btn btn-primary">Terrain</button>
-    <button (click)="setMapType('satellite')" class="btn btn-danger">Satellite</button>
-    <button (click)="setMapType('roadmap')" class="btn btn-warning">Road Map</button>
-    <button (click)="findMe()" class="btn btn-warning">Find Me</button>
-    <button (click)="trackMe()" class="btn btn-warning">Track Me</button>
+  <div class="row" fxFlexAlign="center">
+    <button mat-button color="primary" (click)="setMapType('terrain')">Terrain</button>
+    <button mat-button color="primary" (click)="setMapType('satellite')">Satellite</button>
+    <button mat-button color="primary" (click)="setMapType('roadmap')">Road Map</button>
   </div>
   <div #gmap style="width:100%;height:500px"></div>
   <!-- <mat-list>

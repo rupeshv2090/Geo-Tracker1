@@ -16,7 +16,6 @@ mat-card {
   margin-left: 40%;
 } */
 
-
 mat-spinner {
   margin: 6px;
 }
@@ -49,23 +48,21 @@ p {
 }
 
 div.mat-dark-theme {
-  height: 97vh;
+  height: 86vh;
   background-color: #424242;
-    padding: 45px;
-    background-image: url('../../assets/3D-Automotive.png');
+  background-image: url("../../assets/3D-Automotive.png");
 }
 
 mat-card#login-card {
-  padding: 45px;
-  background-color: #383838;
+  background-color: #64b8bbfa;
 }
 
-mat-form-field{
+mat-form-field {
   margin-top: 20px;
 }
 
 mat-hint {
   font-size: smaller;
-    font-family: serif;
-    color: green;
+  font-family: serif;
+  color: green;
 }

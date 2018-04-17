@@ -1,5 +1,5 @@
 mat-toolbar-row {
-  height: 43px;
+  height: 42px;
   font-family: -webkit-body;
 }
 
@@ -11,18 +11,26 @@ mat-toolbar-row {
 
 .example-sidenav-content {
   /* display: flex; */
-  width: 98%;
-  height: 100%;
+  width: 100%;
   align-items: center;
   justify-content: center;
 }
 
 .example-sidenav {
   padding: 20px;
+  background-color: #07459e;
+  /* background-image: url('../assets/flag1.jpg'); */
+}
+
+.mat-toolbar-box {
+  background-color: #03429cba;
+  /* background-image: url('../assets/flag1.jpg'); */
+
 }
 
 .demo-panel {
-  margin: 10px;
+  /* margin: 10px; */
+  height: -webkit-fill-available;
 }
 
 .demo-panel-toolbar {

@@ -18,6 +18,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.subscribeToScreenSizeChanges();
+    let isLoggedIn = localStorage.getItem("isLoggin");
+    if (isLoggedIn === "1") {
+      this.isVerified = true;
+    } else {
+      this.isVerified = false;
+    }
   }
 
   otpVerifiedFromLogin = (confirm: boolean) => {
