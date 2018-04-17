@@ -19,10 +19,16 @@ export class TrackmeComponent implements OnInit {
   ngOnInit() {
     const mapProp = {
       center: new google.maps.LatLng(18.5793, 73.8143),
-      zoom: 15,
+      zoom: 20,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
+
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      this.showPosition(position);
+    });
+
     if (navigator.geolocation) {
       this.isTracking = true;
       navigator.geolocation.watchPosition((position) => {
@@ -30,6 +36,24 @@ export class TrackmeComponent implements OnInit {
       });
     } else {
       alert('Geolocation is not supported by this browser.');
+    }
+  }
+
+  showPosition(position) {
+    this.currentLat = position.coords.latitude;
+    this.currentLong = position.coords.longitude;
+
+    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    this.map.panTo(location);
+
+    if (!this.marker) {
+      this.marker = new google.maps.Marker({
+        position: location,
+        map: this.map,
+        title: 'Got you!'
+      });
+    } else {
+      this.marker.setPosition(location);
     }
   }
 
