@@ -1,22 +1,66 @@
-<mat-card>
-  <mat-card-title>Login</mat-card-title>
-  <mat-divider></mat-divider>
-  <form class="example-form" *ngIf="!otpSend">
-    <mat-form-field >
-      <input matInput placeholder="Mobile Number" name="mobileNumber" type="tel" maxlength="10" [(ngModel)]="mobileNumber" required>
-    </mat-form-field>
-    <div class="clearfix"></div>
-    <button mat-raised-button style="margin-top:25px" [disabled]="!mobileNumber" (click)="sendOTP()">Send OTP</button>
-  </form>
+<div fxLayout="column" fxLayoutAlign="center center" class="mat-dark-theme">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <mat-card>
+      <div *ngIf="!isLoggedIn">
+        <mat-card-title>Login</mat-card-title>
+        <mat-divider fxLayoutGap="20px"></mat-divider>
+        <form class="example-form" *ngIf="!otpSend">
+          <div fxLayout="row">
+            <div fxLayout="column" style="margin-top:6px;">
+              <mat-slide-toggle name="loginByMobile" [(ngModel)]="loginByMobile">{{loginByMobile=== true?'Mobile':'Email'}}</mat-slide-toggle>
+            </div>
+          </div>
+          <mat-form-field *ngIf="loginByMobile" style="width:100%">
+            <input matInput placeholder="Mobile Number" name="mobileNumber" type="tel" maxlength="10" [(ngModel)]="mobileNumber" required>
+            <mat-error *ngIf="!mobileNumber">
+              Mobile is required
+            </mat-error>
+            <mat-error *ngIf="mobileNumber && mobileNumber.toString().length!==10">
+                Mobile number must be a 10 digit
+              </mat-error>
+          </mat-form-field>
+          <mat-form-field *ngIf="!loginByMobile" style="width:100%">
+            <input matInput placeholder="Email Id" name="emailId" type="email" maxlength="30" [(ngModel)]="emailId" required>
+            <mat-error *ngIf="!emailId">
+                Email is required
+              </mat-error>
+              <!-- <mat-error *ngIf="mobileNumber && mobileNumber.toString().length!==10">
+                  Email number must be a 10 digit
+                </mat-error> -->
+          </mat-form-field>
+          <button mat-raised-button style="margin-top:7px" color="primary" [disabled]="!mobileNumber" (click)="sendOTP()">Send OTP</button>
+        </form>
 
-  <form class="example-form" *ngIf="otpSend">
-    <mat-form-field class="example-full-width">
-      <input matInput placeholder="OTP" name="otpNumber" type="text" maxlength="4" [(ngModel)]="otpNumber" required>
-    </mat-form-field>
-    <button mat-raised-button style="margin-top:25px" [disabled]="!otpNumber" (click)="verifyOTP()">
-      <!-- <mat-spinner *ngIf="verifing" color="primary" mode="indeterminate" determinate="15"></mat-spinner>
+        <form class="example-form" *ngIf="otpSend" style="width:100%">
+          <div fxLayout="row" fxFlex="90">
+            <div fxLayout="column" fxFlex="50" style="margin-top:6px;">
+              <mat-checkbox [disabled]="ticks<5" (click)=resendOTP()>Resend</mat-checkbox>
+              <mat-hint *ngIf="otpSend && ticks<5" style="font-size:smaller">OTP Send Successfully</mat-hint>
+            </div>
+            <div fxLayout="column" fxFlex="50" style="margin-top:6px;">
+                <button mat-raised-button type="button" color="primary" (click)="changeReuqest()">Change {{loginByMobile=== true?'Mobile':'Email'}}</button>
+            </div>
+          </div>
+          <mat-form-field style="width:100%">
+            <input matInput placeholder="OTP" name="otpNumber" type="text" maxlength="4" [(ngModel)]="otpNumber" required>
+            <span *ngIf="ticks <=5" style="padding: 8px 13px;" matSuffix><button mat-mini-fab color="warn">{{5-ticks}}</button></span>
+          </mat-form-field>
+          <button mat-raised-button style="margin-top:7px" color="primary" [disabled]="!otpNumber" (click)="verifyOTP()">
+            <!-- <mat-spinner *ngIf="verifing" color="primary" mode="indeterminate" determinate="15"></mat-spinner>
         <span *ngIf="!verifing">Confirm OTP</span> -->
-      Confirm OTP
-    </button>
-  </form>
-</mat-card>
+            Confirm OTP
+          </button>
+        </form>
+      </div>
+      <div *ngIf="isLoggedIn" class="mat-typography" fxLayout="column" fxLayoutAlign="center center" id="login-success">
+        <h4>Logged in as {{loginByMobile=== true?mobileNumber:emailId}}</h4>
+        <p>Roles: Developer Mode (Test Admin)</p>
+        <div fxLayoutAlign="end center">
+          <button mat-raised-button color="warn" (click)="logout()">
+            Logout
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

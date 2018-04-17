@@ -1,16 +1,71 @@
-.example-form {
-    min-width: 150px;
-    max-width: 500px;
-    width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
-  
-  mat-card{
-      text-align: center;
-      position: absolute;
-      padding: 20px 56px 64px;
-      margin-top: 16%;
-      margin-left: 40%;}
+/* .example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+mat-card {
+  text-align: center;
+  position: absolute;
+  padding: 20px 56px 64px;
+  margin-top: 16%;
+  margin-left: 40%;
+} */
+
+
+mat-spinner {
+  margin: 6px;
+}
+
+.login-error {
+  color: red;
+}
+
+button {
+  width: 100%;
+  text-transform: uppercase;
+  color: lightgrey;
+}
+
+.mat-button {
+  color: lightgrey;
+}
+
+h1 {
+  color: lightgrey;
+}
+
+input {
+  color: lightgrey;
+}
+
+p {
+  text-align: center;
+  color: lightgrey;
+}
+
+div.mat-dark-theme {
+  height: 97vh;
+  background-color: #424242;
+    padding: 45px;
+    background-image: url('../../assets/3D-Automotive.png');
+}
+
+mat-card#login-card {
+  padding: 45px;
+  background-color: #383838;
+}
+
+mat-form-field{
+  margin-top: 20px;
+}
+
+mat-hint {
+  font-size: smaller;
+    font-family: serif;
+    color: green;
+}

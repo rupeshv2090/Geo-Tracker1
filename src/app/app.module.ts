@@ -7,6 +7,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { FlexLayoutModule} from '@angular/flex-layout';
 import 'hammerjs';
 import { MeetingHistoryComponent } from './meeting-history/meeting-history.component';
 import { MapComponent } from './map/map.component';
@@ -16,6 +17,7 @@ import { AddMeetingComponent } from './add-meeting/add-meeting.component';
 import { MeetingListComponent } from './meeting-list/meeting-list.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginService } from './services/login.service';
 
 const appRoutes: Routes = [
   { path: 'meetings', component: MeetingComponent },
@@ -56,9 +58,10 @@ const appRoutes: Routes = [
      ReactiveFormsModule,
     BrowserModule,
     AngularMaterialModule,
+    FlexLayoutModule,
     PrimengModule
   ],
-  providers: [ActivityService],
+  providers: [ActivityService, LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
