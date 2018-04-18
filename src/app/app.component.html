@@ -10,31 +10,31 @@
     </mat-toolbar>
     <mat-nav-list>
       <img class="img-style" height="90px" src="./assets/default-profile.png">
-      <a mat-list-item class="sidenav-link" [routerLink]="['/client']" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link" routerLink="/client" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>person</mat-icon>
         <span class="title" mat-line>Client</span>
         <!-- <span mat-line class="secondary">test</span> -->
       </a>
-      <a mat-list-item class="sidenav-link" [routerLink]="['/team']" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link" routerLink="/team" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>group</mat-icon>
         <span class="title" mat-line>Team</span>
         <!-- <span mat-line class="secondary">test</span> -->
       </a>
-      <a mat-list-item class="sidenav-link" [routerLink]="['/map']" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link" routerLink="/map" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>
           <i class="material-icons">place</i>
         </mat-icon>
         <span class="title" mat-line>Map</span>
         <!-- <span mat-line class="secondary">fullscreen1</span> -->
       </a>
-      <a mat-list-item class="sidenav-link" [routerLink]="['/trackme']" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link" routerLink="/trackme" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>
           <i class="material-icons">person_pin_circle</i>
         </mat-icon>
         <span class="title" mat-line>Live Track</span>
         <!-- <span mat-line class="secondary">fullscreen1</span> -->
       </a>
-      <a mat-list-item class="sidenav-link" [routerLink]="['/meetings']" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link" routerLink="/meetings" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>
           <i class="material-icons">card_travel</i>
         </mat-icon>
@@ -48,7 +48,7 @@
         <span class="title" mat-line>Refer</span>
         <!-- <span mat-line class="secondary">fullscreen1</span> -->
       </a>
-      <a mat-list-item class="sidenav-link" [routerLink]="['/runetech']" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link" routerLink="/runetech" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>
           <i class="material-icons">business</i>
         </mat-icon>
@@ -66,14 +66,14 @@
         <mat-slide-toggle></mat-slide-toggle>
       </span>
       </a>
-      <a mat-list-item class="sidenav-link" [routerLink]="['/settings']" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link" routerLink="/settings" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>
           <i class="material-icons">settings</i>
         </mat-icon>
         <span class="title" mat-line>Settings</span>
         <!-- <span mat-line class="secondary">fullscreen1</span> -->
       </a>
-      <a mat-list-item class="sidenav-link" [routerLink]="['/login']" (click)="sidenav.toggle()">
+      <a mat-list-item class="sidenav-link" routerLink="/login" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>
           <i class="material-icons">power_settings_new</i>
         </mat-icon>
@@ -82,10 +82,10 @@
       </a>
     </mat-nav-list>
   </mat-sidenav>
-  <div *ngIf="!isVerified">
+  <div *ngIf="!isVerified" style="height:-webkit-fill-available;">
     <app-login (otpVerified)="otpVerifiedFromLogin($event)"></app-login>
   </div>
-  <div *ngIf="isVerified">
+  <div *ngIf="isVerified" style="height:-webkit-fill-available;">
     <mat-toolbar id="appToolbar" [ngClass]="{'toolbar-fullscreen': (fullscreen$ | async)}" color="primary">
       <button mat-icon-button (click)="sidenav.toggle()" class="mat-icon-button sidenav-toggle-button" [hidden]="sidenav.opened">
         <mat-icon aria-label="Menu" class="material-icons">menu</mat-icon>
@@ -97,11 +97,12 @@
       <!--<button id="button-login" mat-button [routerLink]="['/signupin']" *ngIf="!(user | async)">Log In</button>-->
       <!-- <button id="button-logout" mat-button>Log Out</button> -->
       <span fxFlex fxLayoutAlign="end">
-        <mat-icon matTooltip="Notification">notifications_none</mat-icon>
+        <mat-icon matTooltip="Notification" class="title-icon">notifications_none</mat-icon>
       </span>
     </mat-toolbar>
+    <div class="example-sidenav-content">
+        <router-outlet></router-outlet>
+      </div>
   </div>
-  <div class="example-sidenav-content">
-    <router-outlet></router-outlet>
-  </div>
+
 </mat-sidenav-container>

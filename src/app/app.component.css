@@ -28,11 +28,6 @@ mat-toolbar-row {
   /* background-image: url('../assets/flag1.jpg'); */
 }
 
-.demo-panel {
-  /* margin: 10px; */
-  height: -webkit-fill-available;
-}
-
 .demo-panel-toolbar {
   margin: 10px 0px;
 }
