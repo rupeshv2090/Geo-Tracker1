@@ -1,0 +1,104 @@
+<div *ngIf="!isVerified">
+    <mat-card class="demo-panel">
+      <mat-card-title>
+        <div fxLayout="row">
+          <span fxFlex fxLayoutAlign="start">
+            <mat-icon class="title-icon">dehaze</mat-icon>
+            <img height="27px" width="30px" src="./favicon.ico">
+            <span class="title-style">Meetings</span>
+          </span>
+          <span fxFlex fxLayoutAlign="end">
+            <mat-icon class="title-icon" matTooltip="Notification">notifications_none</mat-icon>
+          </span>
+        </div>
+      </mat-card-title>
+      <mat-card-content>
+        <app-login (otpVerified)="otpVerifiedFromLogin($event)"></app-login>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div *ngIf="isVerified">
+    <mat-card class="demo-panel">
+      <mat-card-title>
+        <div fxLayout="row">
+          <span fxFlex fxLayoutAlign="start">
+            <mat-icon class="title-icon" (click)="sidenav.open()">dehaze</mat-icon>
+            <img height="27px" width="30px" src="./favicon.ico">
+            <span class="title-style">Meetings</span>
+          </span>
+          <span fxFlex fxLayoutAlign="end">
+            <mat-icon class="title-icon" matTooltip="Notification">notifications_none</mat-icon>
+          </span>
+        </div>
+      </mat-card-title>
+      <mat-card-content>
+        <mat-sidenav-container class="example-container">
+          <mat-sidenav #sidenav ode="push" class="example-sidenav">
+            <mat-toolbar color="primary" class="mat-toolbar-box">
+              <mat-toolbar-row>
+                <img class="img-style" height="90px" src="./assets/default-profile.png">
+              </mat-toolbar-row>
+              <mat-toolbar-row>
+              </mat-toolbar-row>
+              <mat-toolbar-row routerLink="/client" (click)="sidenav.close()">
+                <mat-icon class="toolbar-icon">person</mat-icon>
+                <span>Client</span>
+                <span class="toolbar-spacer"></span>
+              </mat-toolbar-row>
+              <mat-toolbar-row routerLink="/team" (click)="sidenav.close()">
+                <mat-icon class="toolbar-icon">group</mat-icon>
+                <span>Team</span>
+                <span class="toolbar-spacer"></span>
+              </mat-toolbar-row>
+              <mat-toolbar-row routerLink="/map" (click)="sidenav.close()">
+                <mat-icon class="toolbar-icon">place</mat-icon>
+                <span>Map</span>
+                <span class="toolbar-spacer"></span>
+              </mat-toolbar-row>
+              <mat-toolbar-row routerLink="/trackme" (click)="sidenav.close()">
+                <mat-icon class="toolbar-icon">person_pin_circle</mat-icon>
+                <span>Live Track</span>
+                <span class="toolbar-spacer"></span>
+              </mat-toolbar-row>
+              <mat-toolbar-row routerLink="/meetings" (click)="sidenav.close()">
+                <mat-icon class="toolbar-icon">card_travel</mat-icon>
+                <span>Meetings</span>
+                <span class="toolbar-spacer"></span>
+              </mat-toolbar-row>
+              <mat-toolbar-row (click)="sidenav.close()">
+                <mat-icon class="toolbar-icon">share</mat-icon>
+                <span>Refer</span>
+                <span class="toolbar-spacer"></span>
+              </mat-toolbar-row>
+              <mat-toolbar-row routerLink="/runetech" (click)="sidenav.close()">
+                <mat-icon class="toolbar-icon">business</mat-icon>
+                <span>Runee Tech</span>
+                <span class="toolbar-spacer"></span>
+              </mat-toolbar-row>
+              <mat-toolbar-row (click)="sidenav.close()">
+                <mat-icon class="toolbar-icon">mail</mat-icon>
+                <span>Notification</span>
+                <span class="toolbar-spacer"></span>
+                <mat-slide-toggle></mat-slide-toggle>
+              </mat-toolbar-row>
+              <mat-toolbar-row routerLink="/settings" (click)="sidenav.close()">
+                <mat-icon class="toolbar-icon">settings</mat-icon>
+                <span>Settings</span>
+                <span class="toolbar-spacer"></span>
+              </mat-toolbar-row>
+              <mat-toolbar-row routerLink="/login" (click)="sidenav.close()">
+                <mat-icon class="toolbar-icon">power_settings_new</mat-icon>
+                <span>Logout</span>
+                <span class="toolbar-spacer"></span>
+              </mat-toolbar-row>
+            </mat-toolbar>
+          </mat-sidenav>
+          <div class="example-sidenav-content">
+              <router-outlet></router-outlet>
+          </div>
+
+        </mat-sidenav-container>
+      </mat-card-content>
+    </mat-card>
+  </div>

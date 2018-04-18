@@ -1,12 +1,13 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { MatInputModule } from "@angular/material/input";
-import { Observable } from "rxjs/Rx";
-import { LoginService } from "../services/login.service";
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
+import { Observable } from 'rxjs/Rx';
+import { LoginService } from '../services/login.service';
+import { Router } from '@angular/router';
 // import { Email } from '../../../node_modules/emailjs/email.js';
 @Component({
-  selector: "app-login",
-  templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
   otpSend: boolean;
@@ -18,15 +19,18 @@ export class LoginComponent implements OnInit {
   emailId: string;
   ticks = 0;
   @Output() otpVerified: EventEmitter<boolean> = new EventEmitter();
-  constructor(private loginService: LoginService) {}
+  constructor(private loginService: LoginService, private router: Router) {}
 
   ngOnInit() {
     this.otpSend = false;
-    let isLoggedIn = localStorage.getItem("isLoggin");
-    if (isLoggedIn === "1") {
+    let isLoggedIn = localStorage.getItem('isLoggin');
+    let loginByMobile = localStorage.getItem('loginByMobile');
+    if (isLoggedIn === '1') {
       this.isLoggedIn = true;
+      this.loginByMobile = true;
     } else {
       this.isLoggedIn = false;
+      this.loginByMobile = false;
     }
     // const email 	= require('../../../node_modules/emailjs/email');
     // const server 	= email.server.connect({
@@ -63,19 +67,22 @@ export class LoginComponent implements OnInit {
 
   verifyOTP = () => {
     this.verifing = true;
-    if (this.otpNumber.toString() === "1234") {
+    if (this.otpNumber.toString() === '1234') {
       // this.router.navigate[];
       this.otpVerified.emit(true);
       this.verifing = false;
       this.isLoggedIn = true;
-      localStorage.setItem("isLoggin", "1");
-      console.log("Verified Successfully.");
+      localStorage.setItem('isLoggin', '1');
+      localStorage.setItem('loginByMobile','1');
+      console.log('Verified Successfully.');
     }
   };
 
   logout() {
     this.otpVerified.emit(false);
     this.isLoggedIn = false;
-    localStorage.setItem("isLoggin", "0");
+    localStorage.setItem('isLoggin', '0');
+    localStorage.setItem('loginByMobile','0');
+    window.location.reload();
   }
 }

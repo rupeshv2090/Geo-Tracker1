@@ -35,7 +35,7 @@ const appRoutes: Routes = [
   { path: 'client',      component: ClientComponent },
   { path: 'team',      component: TeamComponent },
   { path: 'settings',      component: SettingComponent },
-  { path: '',      component: AppComponent },
+  { path: '',      component: HomeComponent },
   {
     path: 'MeetingList',
     component: MeetingListComponent,

@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./client-list.component.css']
 })
 export class ClientListComponent implements OnInit {
-
+  totalCount: number;
+  pageSize: 10;
+  pageIndex: 0;
   constructor() { }
 
   ngOnInit() {
   }
 
+  page(pageNumber: number){
+
+  }
 }

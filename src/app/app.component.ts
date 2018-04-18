@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +13,7 @@ export class AppComponent implements OnInit {
   isVerified: boolean;
 
   constructor(
+    private router: Router
     // private media: ObservableMedia,
   ) {
   }
@@ -28,6 +30,7 @@ export class AppComponent implements OnInit {
 
   otpVerifiedFromLogin = (confirm: boolean) => {
     this.isVerified = confirm;
+    this.router.navigate(['/map']);
   }
 
   private subscribeToScreenSizeChanges() {

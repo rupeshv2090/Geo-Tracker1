@@ -19,7 +19,7 @@ export class TrackmeComponent implements OnInit {
   ngOnInit() {
     const mapProp = {
       center: new google.maps.LatLng(18.5793, 73.8143),
-      zoom: 20,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
 
@@ -29,6 +29,27 @@ export class TrackmeComponent implements OnInit {
       this.showPosition(position);
     });
 
+    if (navigator.geolocation) {
+      this.isTracking = true;
+      navigator.geolocation.watchPosition((position) => {
+        this.showTrackingPosition(position);
+      });
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  }
+
+  findMe() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.showPosition(position);
+      });
+    } else {
+      alert('Geolocation is not supported by this browser.');
+    }
+  }
+
+  trackMe() {
     if (navigator.geolocation) {
       this.isTracking = true;
       navigator.geolocation.watchPosition((position) => {

@@ -1,5 +1,5 @@
 <div fxLayout="column" fxLayoutAlign="center center" class="mat-dark-theme">
-  <div fxLayout="row" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayoutAlign="center center" style="padding: 25px">
     <mat-card id="login-card">
       <div *ngIf="!isLoggedIn">
         <mat-card-title>Login</mat-card-title>
@@ -32,10 +32,10 @@
         </form>
 
         <form class="example-form" *ngIf="otpSend" style="width:100%">
-          <div fxLayout="row" fxFlex="90">
+          <div fxLayout="row" fxFlex="100">
             <div fxLayout="column" fxFlex="50" style="margin-top:6px;">
-              <mat-checkbox [disabled]="ticks<5" (click)=resendOTP()>Resend</mat-checkbox>
-              <mat-hint *ngIf="otpSend && ticks<5" style="font-size:smaller">OTP Send Successfully</mat-hint>
+              <mat-checkbox [disabled]="ticks<99" (click)=resendOTP()>Resend</mat-checkbox>
+              <mat-hint *ngIf="otpSend && ticks<99" style="font-size:smaller">OTP Send Successfully</mat-hint>
             </div>
             <div fxLayout="column" fxFlex="50" style="margin-top:6px;">
                 <button mat-raised-button type="button" color="primary" (click)="changeReuqest()">Change {{loginByMobile=== true?'Mobile':'Email'}}</button>
@@ -43,7 +43,7 @@
           </div>
           <mat-form-field style="width:100%">
             <input matInput placeholder="OTP" name="otpNumber" type="text" maxlength="4" [(ngModel)]="otpNumber" required>
-            <span *ngIf="ticks <=5" style="padding: 8px 13px;" matSuffix><button mat-mini-fab color="warn">{{5-ticks}}</button></span>
+            <span *ngIf="ticks <=99" style="padding: 8px 13px;" matSuffix><button mat-mini-fab color="warn">{{99-ticks}}</button></span>
           </mat-form-field>
           <button mat-raised-button style="margin-top:7px" color="primary" [disabled]="!otpNumber" (click)="verifyOTP()">
             <!-- <mat-spinner *ngIf="verifing" color="primary" mode="indeterminate" determinate="15"></mat-spinner>
@@ -53,7 +53,7 @@
         </form>
       </div>
       <div *ngIf="isLoggedIn" class="mat-typography" fxLayout="column" fxLayoutAlign="center center" id="login-success">
-        <h4>Logged in as {{loginByMobile=== true?mobileNumber:emailId}}</h4>
+        <h4>Logged in as <span style="font-weight:600">{{loginByMobile===true?'mobileNumber':'emailId'}}</span></h4>
         <p>Roles: Developer Mode (Test Admin)</p>
         <div fxLayoutAlign="end center">
           <button mat-raised-button color="warn" (click)="logout()">

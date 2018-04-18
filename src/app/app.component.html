@@ -1,102 +1,107 @@
-<div *ngIf="!isVerified">
-    <mat-card class="demo-panel">
-      <mat-card-title>
-        <div fxLayout="row">
-          <span fxFlex fxLayoutAlign="start">
-            <mat-icon class="toolbar-icon">dehaze</mat-icon>
-            <span>Meetings</span>
-          </span>
-          <span fxFlex fxLayoutAlign="end">
-            <mat-icon class="toolbar-icon" matTooltip="Notification">notifications_none</mat-icon>
-          </span>
-        </div>
-      </mat-card-title>
-      <mat-card-content>
-        <app-login (otpVerified)="otpVerifiedFromLogin($event)"></app-login>
-      </mat-card-content>
-    </mat-card>
+<mat-sidenav-container fullscreen>
+  <mat-sidenav #sidenav mode="push" class="app-sidenav">
+    <mat-toolbar color="primary">
+      <!--future svg to go here-->
+      <img height="27px" width="30px" src="./favicon.ico">
+      <span class="toolbar-filler"></span>
+      <button mat-icon-button (click)="sidenav.toggle()" class="mat-icon-button sidenav-toggle-button" [hidden]="!sidenav.opened">
+        <mat-icon aria-label="Menu" class="material-icons">close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-nav-list>
+      <img class="img-style" height="90px" src="./assets/default-profile.png">
+      <a mat-list-item class="sidenav-link" [routerLink]="['/client']" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>person</mat-icon>
+        <span class="title" mat-line>Client</span>
+        <!-- <span mat-line class="secondary">test</span> -->
+      </a>
+      <a mat-list-item class="sidenav-link" [routerLink]="['/team']" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>group</mat-icon>
+        <span class="title" mat-line>Team</span>
+        <!-- <span mat-line class="secondary">test</span> -->
+      </a>
+      <a mat-list-item class="sidenav-link" [routerLink]="['/map']" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>
+          <i class="material-icons">place</i>
+        </mat-icon>
+        <span class="title" mat-line>Map</span>
+        <!-- <span mat-line class="secondary">fullscreen1</span> -->
+      </a>
+      <a mat-list-item class="sidenav-link" [routerLink]="['/trackme']" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>
+          <i class="material-icons">person_pin_circle</i>
+        </mat-icon>
+        <span class="title" mat-line>Live Track</span>
+        <!-- <span mat-line class="secondary">fullscreen1</span> -->
+      </a>
+      <a mat-list-item class="sidenav-link" [routerLink]="['/meetings']" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>
+          <i class="material-icons">card_travel</i>
+        </mat-icon>
+        <span class="title" mat-line>Meetings</span>
+        <!-- <span mat-line class="secondary">fullscreen1</span> -->
+      </a>
+      <a mat-list-item class="sidenav-link" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>
+          <i class="material-icons">share</i>
+        </mat-icon>
+        <span class="title" mat-line>Refer</span>
+        <!-- <span mat-line class="secondary">fullscreen1</span> -->
+      </a>
+      <a mat-list-item class="sidenav-link" [routerLink]="['/runetech']" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>
+          <i class="material-icons">business</i>
+        </mat-icon>
+        <span class="title" mat-line>Runee Tech</span>
+        <!-- <span mat-line class="secondary">fullscreen1</span> -->
+      </a>
+      <a mat-list-item class="sidenav-link">
+        <mat-icon mat-list-icon>
+          <i class="material-icons">mail</i>
+        </mat-icon>
+        <span class="title" mat-line>Notification</span>
+        <!-- <span mat-line class="secondary">fullscreen1</span> -->
+        <span class="toolbar-spacer"></span>
+        <span fxFlex fxLayoutAlign="end">
+        <mat-slide-toggle></mat-slide-toggle>
+      </span>
+      </a>
+      <a mat-list-item class="sidenav-link" [routerLink]="['/settings']" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>
+          <i class="material-icons">settings</i>
+        </mat-icon>
+        <span class="title" mat-line>Settings</span>
+        <!-- <span mat-line class="secondary">fullscreen1</span> -->
+      </a>
+      <a mat-list-item class="sidenav-link" [routerLink]="['/login']" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>
+          <i class="material-icons">power_settings_new</i>
+        </mat-icon>
+        <span class="title" mat-line>Logout</span>
+        <!-- <span mat-line class="secondary">fullscreen1</span> -->
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <div *ngIf="!isVerified">
+    <app-login (otpVerified)="otpVerifiedFromLogin($event)"></app-login>
   </div>
-
   <div *ngIf="isVerified">
-    <mat-card class="demo-panel">
-      <mat-card-title>
-        <div fxLayout="row">
-          <span fxFlex fxLayoutAlign="start">
-            <mat-icon class="toolbar-icon" (click)="sidenav.open()">dehaze</mat-icon>
-            <span>Meetings</span>
-          </span>
-          <span fxFlex fxLayoutAlign="end">
-            <mat-icon class="toolbar-icon" matTooltip="Notification">notifications_none</mat-icon>
-          </span>
-        </div>
-      </mat-card-title>
-      <mat-card-content>
-        <mat-sidenav-container class="example-container">
-          <mat-sidenav #sidenav class="example-sidenav">
-            <mat-toolbar color="primary" class="mat-toolbar-box">
-              <mat-toolbar-row>
-                <img class="img-style" height="90px" src="./assets/default-profile.png">
-              </mat-toolbar-row>
-              <mat-toolbar-row>
-              </mat-toolbar-row>
-              <mat-toolbar-row routerLink="/client">
-                <mat-icon class="toolbar-icon">person</mat-icon>
-                <span>Client</span>
-                <span class="toolbar-spacer"></span>
-              </mat-toolbar-row>
-              <mat-toolbar-row routerLink="/team">
-                <mat-icon class="toolbar-icon">group</mat-icon>
-                <span>Team</span>
-                <span class="toolbar-spacer"></span>
-              </mat-toolbar-row>
-              <mat-toolbar-row routerLink="/map">
-                <mat-icon class="toolbar-icon">place</mat-icon>
-                <span>Map</span>
-                <span class="toolbar-spacer"></span>
-              </mat-toolbar-row>
-              <mat-toolbar-row routerLink="/trackme">
-                <mat-icon class="toolbar-icon">person_pin_circle</mat-icon>
-                <span>Live Track</span>
-                <span class="toolbar-spacer"></span>
-              </mat-toolbar-row>
-              <mat-toolbar-row routerLink="/meetings">
-                <mat-icon class="toolbar-icon">card_travel</mat-icon>
-                <span>Meetings</span>
-                <span class="toolbar-spacer"></span>
-              </mat-toolbar-row>
-              <mat-toolbar-row>
-                <mat-icon class="toolbar-icon">share</mat-icon>
-                <span>Refer</span>
-                <span class="toolbar-spacer"></span>
-              </mat-toolbar-row>
-              <mat-toolbar-row routerLink="/">
-                <mat-icon class="toolbar-icon">business</mat-icon>
-                <span>Runee Tech</span>
-                <span class="toolbar-spacer"></span>
-              </mat-toolbar-row>
-              <mat-toolbar-row>
-                <mat-icon class="toolbar-icon">mail</mat-icon>
-                <span>Notification</span>
-                <span class="toolbar-spacer"></span>
-                <mat-slide-toggle></mat-slide-toggle>
-              </mat-toolbar-row>
-              <mat-toolbar-row routerLink="/settings">
-                <mat-icon class="toolbar-icon">settings</mat-icon>
-                <span>Settings</span>
-                <span class="toolbar-spacer"></span>
-              </mat-toolbar-row>
-              <mat-toolbar-row routerLink="/login">
-                <mat-icon class="toolbar-icon">power_settings_new</mat-icon>
-                <span>Logout</span>
-                <span class="toolbar-spacer"></span>
-              </mat-toolbar-row>
-            </mat-toolbar>
-          </mat-sidenav>
-          <div class="example-sidenav-content">
-              <router-outlet></router-outlet>
-          </div>
-
-        </mat-sidenav-container>
-      </mat-card-content>
-    </mat-card>
+    <mat-toolbar id="appToolbar" [ngClass]="{'toolbar-fullscreen': (fullscreen$ | async)}" color="primary">
+      <button mat-icon-button (click)="sidenav.toggle()" class="mat-icon-button sidenav-toggle-button" [hidden]="sidenav.opened">
+        <mat-icon aria-label="Menu" class="material-icons">menu</mat-icon>
+      </button>
+      <h1 class="component-title">
+        <a class="title-link">{{title}}</a>
+      </h1>
+      <span class="toolbar-filler"></span>
+      <!--<button id="button-login" mat-button [routerLink]="['/signupin']" *ngIf="!(user | async)">Log In</button>-->
+      <!-- <button id="button-logout" mat-button>Log Out</button> -->
+      <span fxFlex fxLayoutAlign="end">
+        <mat-icon matTooltip="Notification">notifications_none</mat-icon>
+      </span>
+    </mat-toolbar>
   </div>
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
