@@ -10,8 +10,8 @@ export class TrackmeComponent implements OnInit {
 
   @ViewChild('gmap') gmapElement: any;
   map: google.maps.Map;
-  currentLat: string;
-  currentLong: string;
+  currentLat: number;
+  currentLong: number;
   marker: google.maps.Marker;
   isTracking: boolean;
   accuracy: any;
@@ -29,7 +29,21 @@ export class TrackmeComponent implements OnInit {
     if (navigator.geolocation) {
       this.isTracking = true;
       navigator.geolocation.watchPosition((position) => {
-        this.showTrackingPosition(position);
+        this.currentLat = position.coords.latitude;
+    this.currentLong = position.coords.longitude;
+
+    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    this.map.panTo(location);
+
+    if (!this.marker) {
+      this.marker = new google.maps.Marker({
+        position: location,
+        map: this.map,
+        title: 'Got you(Tracking)!'
+      });
+    } else {
+      this.marker.setPosition(location);
+    }
       });
     } else {
       alert('Geolocation is not supported by this browser.');
