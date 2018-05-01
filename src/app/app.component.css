@@ -58,9 +58,8 @@ mat-toolbar-row {
 }
 
 .img-style {
-  margin-left: 40px;
   border-radius: 50%;
-  background-color: #3f51b5;
+  background-color: #fafafa;
 }
 
 .title-style {
@@ -73,4 +72,13 @@ mat-toolbar-row {
 
 .toolbar-filler {
   flex: 1 1 auto;
+}
+
+.sidenav-toggle-button {
+  padding-right: 20px;
+}
+
+.term-policy {
+  font-size: small;
+  color: #3f51b5;
 }

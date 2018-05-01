@@ -2,14 +2,15 @@
   <mat-sidenav #sidenav mode="push" class="app-sidenav">
     <mat-toolbar color="primary">
       <!--future svg to go here-->
-      <img height="27px" width="30px" src="./favicon.ico">
+      <!-- <img height="27px" width="30px" src="./favicon.ico"> -->
+      <img class="img-style" height="40px" src="./assets/default-profile.png">
       <span class="toolbar-filler"></span>
-      <button mat-icon-button (click)="sidenav.toggle()" class="mat-icon-button sidenav-toggle-button" [hidden]="!sidenav.opened">
+      <button mat-icon-button (click)="sidenav.toggle()" [hidden]="!sidenav.opened">
         <mat-icon aria-label="Menu" class="material-icons">close</mat-icon>
       </button>
     </mat-toolbar>
     <mat-nav-list>
-      <img class="img-style" height="90px" src="./assets/default-profile.png">
+      <!-- <img class="img-style" height="90px" src="./assets/default-profile.png"> -->
       <a mat-list-item class="sidenav-link" routerLink="/client" (click)="sidenav.toggle()">
         <mat-icon mat-list-icon>person</mat-icon>
         <span class="title" mat-line>Client</span>
@@ -80,6 +81,22 @@
         <span class="title" mat-line>Logout</span>
         <!-- <span mat-line class="secondary">fullscreen1</span> -->
       </a>
+      <mat-divider></mat-divider>
+      <div fxLayout="row">
+        <div fxLayout="column" fxFlex="100">
+          <div mat-dialog-actions fxLayout="row">
+            <span fxFlex fxLayoutAlign="start">
+              <a mat-list-item class="term-policy">Terms of Service</a>
+            </span>
+            <span fxFlex fxLayoutAlign="end">
+              <a mat-list-item class="term-policy">Privacy Policy</a>
+            </span>
+          </div>
+          <div mat-dialog-actions fxLayout="row">
+            <span mat-list-item class="term-policy">© Copyright 2018 Runee Tech. All Rights Reserved.</span>
+          </div>
+        </div>
+      </div>
     </mat-nav-list>
   </mat-sidenav>
   <div *ngIf="!isVerified" style="height:-webkit-fill-available;">
@@ -87,7 +104,7 @@
   </div>
   <div *ngIf="isVerified" style="height:-webkit-fill-available;">
     <mat-toolbar id="appToolbar" [ngClass]="{'toolbar-fullscreen': (fullscreen$ | async)}" color="primary">
-      <button mat-icon-button (click)="sidenav.toggle()" class="mat-icon-button sidenav-toggle-button" [hidden]="sidenav.opened">
+      <button mat-icon-button (click)="sidenav.toggle()" class="sidenav-toggle-button" [hidden]="sidenav.opened">
         <mat-icon aria-label="Menu" class="material-icons">menu</mat-icon>
       </button>
       <h1 class="component-title">

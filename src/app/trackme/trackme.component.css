@@ -9,3 +9,16 @@ mat-nav-list.footer {
   font-size: 14px;
 }
 
+.btn-fab-track {
+  position: fixed;
+  bottom: 90px;
+  left: 5px;
+  z-index: 1;
+}
+
+.btn-fab-find {
+  position: fixed;
+  bottom: 34px;
+  left: 5px;
+  z-index: 1;
+}
