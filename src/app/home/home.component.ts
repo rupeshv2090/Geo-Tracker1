@@ -65,10 +65,15 @@ export class HomeComponent implements OnInit {
       this.marker = new google.maps.Marker({
         position: location,
         map: this.map,
-        title: 'Got you!'
+        title: 'Got you(Position)!'
       });
     } else {
       this.marker.setPosition(location);
+    //   var getInfoWindow = new google.maps.InfoWindow({
+    //     content: "<b>Your Current Location</b><br/> Latitude:" +
+    //     this.currentLat + "<br /> Longitude:" + this.currentLong + ""
+    // });
+    //   getInfoWindow.open(this.map, this.marker);
     }
   }
 
@@ -84,7 +89,7 @@ export class HomeComponent implements OnInit {
       this.marker = new google.maps.Marker({
         position: location,
         map: this.map,
-        title: 'Got you!'
+        title: 'Got you(Tracking)!'
       });
     } else {
       this.marker.setPosition(location);

@@ -50,7 +50,7 @@ p {
 div.mat-dark-theme {
   height: 86vh;
   background-color: #424242;
-  background-image: url("../../assets/3D-Automotive.png");
+  background-image: url("../../assets/3D-Automotive.jpg");
 }
 
 mat-card#login-card {

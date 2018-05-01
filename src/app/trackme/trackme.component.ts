@@ -25,10 +25,6 @@ export class TrackmeComponent implements OnInit {
 
     this.map = new google.maps.Map(this.gmapElement.nativeElement, mapProp);
 
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.showPosition(position);
-    });
-
     if (navigator.geolocation) {
       this.isTracking = true;
       navigator.geolocation.watchPosition((position) => {
@@ -71,7 +67,7 @@ export class TrackmeComponent implements OnInit {
       this.marker = new google.maps.Marker({
         position: location,
         map: this.map,
-        title: 'Got you!'
+        title: 'Got you(Position)!'
       });
     } else {
       this.marker.setPosition(location);
@@ -90,7 +86,7 @@ export class TrackmeComponent implements OnInit {
       this.marker = new google.maps.Marker({
         position: location,
         map: this.map,
-        title: 'Got you!'
+        title: 'Got you(Tracking)!'
       });
     } else {
       this.marker.setPosition(location);
