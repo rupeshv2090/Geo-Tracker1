@@ -28,7 +28,7 @@
                   Email number must be a 10 digit
                 </mat-error> -->
           </mat-form-field>
-          <button mat-raised-button style="margin-top:7px" color="primary" [disabled]="!mobileNumber" (click)="sendOTP()">Send OTP</button>
+          <button mat-raised-button style="margin-top:7px" color="primary" [disabled]="loginByMobile===true?!mobileNumber:!emailId" (click)="sendOTP()">Send OTP</button>
         </form>
 
         <form class="example-form" *ngIf="otpSend" style="width:100%">
@@ -53,7 +53,7 @@
         </form>
       </div>
       <div *ngIf="isLoggedIn" class="mat-typography" fxLayout="column" fxLayoutAlign="center center" id="login-success">
-        <h4>Logged in as <span style="font-weight:600">{{loginByMobile===true?'mobileNumber':'emailId'}}</span></h4>
+        <h4>Logged in as <span style="font-weight:600">{{loginByMobile===true?mobileNumber:emailId}}</span></h4>
         <p>Roles: Developer Mode (Test Admin)</p>
         <div fxLayoutAlign="end center">
           <button mat-raised-button color="warn" (click)="logout()">

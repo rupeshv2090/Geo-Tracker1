@@ -14,6 +14,7 @@ export class TrackmeComponent implements OnInit {
   currentLong: string;
   marker: google.maps.Marker;
   isTracking: boolean;
+  accuracy: any;
   constructor() { }
 
   ngOnInit() {
@@ -75,21 +76,46 @@ export class TrackmeComponent implements OnInit {
   }
 
   showTrackingPosition(position) {
-    console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
-    this.currentLat = position.coords.latitude;
-    this.currentLong = position.coords.longitude;
+    // console.log(`tracking postion:  ${position.coords.latitude} - ${position.coords.longitude}`);
+    // this.currentLat = position.coords.latitude;
+    // this.currentLong = position.coords.longitude;
 
-    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    this.map.panTo(location);
+    // const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    // this.map.panTo(location);
 
-    if (!this.marker) {
-      this.marker = new google.maps.Marker({
-        position: location,
-        map: this.map,
-        title: 'Got you(Tracking)!'
-      });
-    } else {
-      this.marker.setPosition(location);
-    }
+    // if (!this.marker) {
+    //   this.marker = new google.maps.Marker({
+    //     position: location,
+    //     map: this.map,
+    //     title: 'Got you(Tracking)!'
+    //   });
+    // } else {
+    //   this.marker.setPosition(location);
+    // }
+    const icon = {
+      // url: '',
+      scaledSize: new google.maps.Size(30, 30), // scaled size
+      origin: new google.maps.Point(0, 0), // origin
+      anchor: new google.maps.Point(0, 0)
+  };
+  const myLatLng = new google.maps.LatLng(position.coords.latitude,
+          position.coords.longitude);
+  this.marker = new google.maps.Marker({
+      position : myLatLng,
+      map: this.map,
+      icon: icon,
+      draggable : false,
+      title : 'Mark Home'
+  });
+
+  this.map.panTo(myLatLng);
+  this.accuracy = position.coords.accuracy;
+
+  google.maps.event.addListener(this.map, 'dragstart', function() {
+  });
+  google.maps.event.addListener(this.map, 'dragend', function() {
+  });
+  google.maps.event.addListener(this.map, 'center_changed', function() {
+  });
   }
 }

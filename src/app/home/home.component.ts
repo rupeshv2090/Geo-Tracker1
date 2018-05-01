@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
   currentLong: string;
   marker: google.maps.Marker;
   isTracking: boolean;
+  accuracy: any;
   constructor() { }
 
   ngOnInit() {
@@ -55,26 +56,52 @@ export class HomeComponent implements OnInit {
   }
 
   showPosition(position) {
-    this.currentLat = position.coords.latitude;
-    this.currentLong = position.coords.longitude;
+    // this.currentLat = position.coords.latitude;
+    // this.currentLong = position.coords.longitude;
 
-    const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-    this.map.panTo(location);
+    // const location = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    // this.map.panTo(location);
 
-    if (!this.marker) {
-      this.marker = new google.maps.Marker({
-        position: location,
-        map: this.map,
-        title: 'Got you(Position)!'
-      });
-    } else {
-      this.marker.setPosition(location);
-    //   var getInfoWindow = new google.maps.InfoWindow({
-    //     content: "<b>Your Current Location</b><br/> Latitude:" +
-    //     this.currentLat + "<br /> Longitude:" + this.currentLong + ""
-    // });
-    //   getInfoWindow.open(this.map, this.marker);
-    }
+    // if (!this.marker) {
+    //   this.marker = new google.maps.Marker({
+    //     position: location,
+    //     map: this.map,
+    //     title: 'Got you(Position)!'
+    //   });
+    // } else {
+    //   this.marker.setPosition(location);
+    // //   var getInfoWindow = new google.maps.InfoWindow({
+    // //     content: "<b>Your Current Location</b><br/> Latitude:" +
+    // //     this.currentLat + "<br /> Longitude:" + this.currentLong + ""
+    // // });
+    // //   getInfoWindow.open(this.map, this.marker);
+    // }
+
+      const icon = {
+      // url: './favicon.ico',
+      scaledSize: new google.maps.Size(30, 30), // scaled size
+      origin: new google.maps.Point(0, 0), // origin
+      anchor: new google.maps.Point(0, 0)
+  };
+  const myLatLng = new google.maps.LatLng(position.coords.latitude,
+          position.coords.longitude);
+  this.marker = new google.maps.Marker({
+      position : myLatLng,
+      map: this.map,
+      icon: icon,
+      draggable : false,
+      title : 'Mark Home'
+  });
+
+  this.map.panTo(myLatLng);
+  this.accuracy = position.coords.accuracy;
+
+  google.maps.event.addListener(this.map, 'dragstart', function() {
+  });
+  google.maps.event.addListener(this.map, 'dragend', function() {
+  });
+  google.maps.event.addListener(this.map, 'center_changed', function() {
+  });
   }
 
   showTrackingPosition(position) {

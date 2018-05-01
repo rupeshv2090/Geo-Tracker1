@@ -23,11 +23,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.otpSend = false;
-    let isLoggedIn = localStorage.getItem('isLoggin');
-    let loginByMobile = localStorage.getItem('loginByMobile');
+    const isLoggedIn = localStorage.getItem('isLoggin');
+    const loginByMobile = localStorage.getItem('loginByMobile');
     if (isLoggedIn === '1') {
       this.isLoggedIn = true;
       this.loginByMobile = true;
+      if (this.loginByMobile) {
+        this.mobileNumber = + localStorage.getItem('LoggedBy');
+      } else {
+        this.emailId = localStorage.getItem('LoggedBy');
+      }
     } else {
       this.isLoggedIn = false;
       this.loginByMobile = false;
@@ -61,9 +66,9 @@ export class LoginComponent implements OnInit {
 
   sendOTP = () => {
     this.otpSend = true;
-    let timer = Observable.timer(2000, 1000);
+    const timer = Observable.timer(2000, 1000);
     timer.subscribe(t => (this.ticks = t));
-  };
+  }
 
   verifyOTP = () => {
     this.verifing = true;
@@ -73,16 +78,18 @@ export class LoginComponent implements OnInit {
       this.verifing = false;
       this.isLoggedIn = true;
       localStorage.setItem('isLoggin', '1');
-      localStorage.setItem('loginByMobile','1');
+      localStorage.setItem('loginByMobile', '1');
+      localStorage.setItem('LoggedBy', this.loginByMobile === true ? this.mobileNumber.toString() : this.emailId);
       console.log('Verified Successfully.');
     }
-  };
+  }
 
   logout() {
     this.otpVerified.emit(false);
     this.isLoggedIn = false;
     localStorage.setItem('isLoggin', '0');
-    localStorage.setItem('loginByMobile','0');
-    window.location.reload();
+    localStorage.setItem('loginByMobile', '0');
+    localStorage.setItem('LoggedBy', '');
+    this.router.navigate(['/login']);
   }
 }
