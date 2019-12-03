@@ -37,9 +37,11 @@ setDisplayMessage(msg: string) {
 
 onSubmit1() {
   debugger
+  const endpoint = '/assets/upload/';
+
   const formData = new FormData();
   formData.append('file', this.fileData);
-  this.http.post('http://localhost:4200/assets/upload', formData)
+  this.http.post(endpoint, formData)
     .subscribe(res => {
       console.log(res);
       alert('SUCCESS !!');
@@ -83,7 +85,7 @@ const endpoint = '/assets/upload/';
     //   }
     // );
 
-    this.http.post('url/to/your/api', formData, {
+    this.http.post(endpoint, formData, {
       reportProgress: true,
       observe: 'events'
   })
