@@ -37,7 +37,7 @@ setDisplayMessage(msg: string) {
 
 onSubmit1() {
   debugger
-  const endpoint = '/assets/upload/';
+  const endpoint = '/assets/gpx';
 
   const formData = new FormData();
   formData.append('file', this.fileData);
@@ -76,7 +76,7 @@ onSubmit1() {
     debugger
     const formData = new FormData();
     formData.append('file', this.form.get('avatar').value);
-const endpoint = '/assets/upload/';
+const endpoint = '/assets/gpx/';
     // this.http.post(endpoint, formData).subscribe(
     //   (res) => console.log(res),
     //   (err) => {
