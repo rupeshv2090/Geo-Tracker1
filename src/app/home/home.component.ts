@@ -1,5 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { } from '@types/googlemaps';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -14,9 +19,38 @@ export class HomeComponent implements OnInit {
   marker: google.maps.Marker;
   isTracking: boolean;
   accuracy: any;
-  constructor() { }
+  displayMessage: string = '';
+  form: FormGroup;
+  error: string;
+  userId: number = 1;
+  uploadResponse = { status: '', message: '', filePath: '' };
+  fileData: File = null;
+constructor( private formBuilder: FormBuilder, private http: HttpClient, private el: ElementRef) { }
+setDisplayMessage(msg: string) {
+   this.displayMessage = msg;
+ }
 
+ fileProgress(fileInput: any) {
+  this.fileData = <File>fileInput.target.files[0];
+}
+
+
+onSubmit1() {
+  debugger
+  const formData = new FormData();
+  formData.append('file', this.fileData);
+  this.http.post('http://localhost:4200/assets/upload', formData)
+    .subscribe(res => {
+      console.log(res);
+      alert('SUCCESS !!');
+    })
+}
   ngOnInit() {
+
+    this.form = this.formBuilder.group({
+      avatar: ['']
+    });
+
     const mapProp = {
       center: new google.maps.LatLng(18.5793, 73.8143),
       zoom: 15,
@@ -28,6 +62,38 @@ export class HomeComponent implements OnInit {
         this.showPosition(position);
       });
     }
+  }
+
+  onFileChange(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.form.get('avatar').setValue(file);
+    }
+  }
+  onSubmit() {
+    debugger
+    const formData = new FormData();
+    formData.append('file', this.form.get('avatar').value);
+const endpoint = '/assets/upload/';
+    // this.http.post(endpoint, formData).subscribe(
+    //   (res) => console.log(res),
+    //   (err) => {
+    //     this.error = err;
+    //     console.log(err);
+    //   }
+    // );
+
+    this.http.post('url/to/your/api', formData, {
+      reportProgress: true,
+      observe: 'events'
+  })
+  .subscribe(events => {
+      if(events.type == HttpEventType.UploadProgress) {
+          console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
+      } else if(events.type === HttpEventType.Response) {
+          console.log(events);
+      }
+  })
   }
 
   setMapType(mapTypeId: string) {
@@ -122,4 +188,32 @@ export class HomeComponent implements OnInit {
       this.marker.setPosition(location);
     }
   }
+
+
+  upload() {
+    //this.activeModal.dismiss('Cross click');
+  }
+
+ onChange(event) {
+   debugger;
+  let inputEl: HTMLInputElement = this.el.nativeElement.querySelector('#photo');
+
+ let fileCount: number = inputEl.files.length;
+
+ let formData = new FormData();
+
+ if (fileCount > 0) { // a file was selected
+
+   formData.append('photo', inputEl.files.item(0));
+   const uploadURL = '/assests/upload';
+   this.http
+     .post(uploadURL, formData).map((res: Response) => res.json()).subscribe(
+     // map the success function and alert the response
+     (success) => {
+       alert("success");
+     },
+     (error) => alert(error || JSON));
+    }
+
+   }
 }
