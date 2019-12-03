@@ -88,7 +88,7 @@ const endpoint = '/assets/upload/';
       observe: 'events'
   })
   .subscribe(events => {
-      if(events.type == HttpEventType.UploadProgress) {
+      if(events.type === HttpEventType.UploadProgress) {
           console.log('Upload progress: ', Math.round(events.loaded / events.total * 100) + '%');
       } else if(events.type === HttpEventType.Response) {
           console.log(events);
